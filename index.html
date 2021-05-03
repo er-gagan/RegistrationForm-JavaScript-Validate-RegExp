@@ -9,6 +9,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+        <!-- Jquery Google CDN version 3.6.0 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Registration Form!</title>
 </head>
 
@@ -16,53 +19,124 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Forms</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
         </div>
     </nav>
-
-    <div id="formsFile"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap 5 Alert -->
+    <div class="alert alert-success alert-dismissible fade show p-2" role="alert" id="showMsg">
+        <strong id="headerMsg"></strong><span id="bodyMsg"></span>
+        <button type="button" class="btn-close btn-sm py-3" data-bs-dismiss="alert" aria-label="Close"
+            id="msgBtn"></button>
+    </div>
     <script>
-        $(function () {
-            $("#formsFile").load("./forms.html");
-        });
+        $('#showMsg').hide();
     </script>
 
+    <!-- Forms -->
+    <div class="container my-2">
+        <h2>Registration form</h2>
+        <form method="get" id="myForm" novalidate>
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label for="name" class="form-label">Name</label>
+                <input required autofocus type="text" class="form-control" id="name" placeholder="Enter name">
+                <div id="NameMsg" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label for="email" class="form-label">Email</label>
+                <input required type="email" class="form-control" id="email" placeholder="name@example.com">
+                <div id="EmailMsg" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label for="phone" class="form-label">Phone</label>
+                <input required type="text" class="form-control" id="phone" placeholder="Enter phone">
+                <div id="PhoneMsg" class="invalid-feedback"></div>
+
+            </div>
+
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label for="age" class="form-label">Age</label>
+                <input required type="text" class="form-control" id="age" placeholder="Enter age">
+                <div id="AgeMsg" class="invalid-feedback"></div>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label class="form-label">Gender</label>
+                <div style="display: flex;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male">
+                        <label class="form-check-label" for="male">
+                            Male
+                        </label>
+                    </div>
+
+                    <div class="form-check mx-5">
+                        <input class="form-check-input" type="radio" name="gender" id="female">
+                        <label class="form-check-label" for="female">
+                            Female
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="others">
+                        <label class="form-check-label" for="others">
+                            Others
+                        </label>
+                    </div>
+                </div>
+                <small id="GenderMsg" style="color: #DC3545;"></small>
+            </div>
+
+            <!-- Habbits -->
+            <div class="mb-3">
+                <span style="color: red;">*&nbsp;</span><label class="form-label">Habbits</label>
+                <div style="display: flex;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Coding" id="Coding">
+                        <label class="form-check-label" for="Coding">
+                            Coding
+                        </label>
+                    </div>
+
+                    <div class="form-check mx-5">
+                        <input class="form-check-input" type="checkbox" value="Singing" id="Singing">
+                        <label class="form-check-label" for="Singing">
+                            Singing
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Dancing" id="Dancing">
+                        <label class="form-check-label" for="Dancing">
+                            Dancing
+                        </label>
+                    </div>
+
+                    <div class="form-check mx-5">
+                        <input class="form-check-input" type="checkbox" value="Reading" id="Reading">
+                        <label class="form-check-label" for="Reading">
+                            Reading
+                        </label>
+                    </div>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Playing" id="Playing">
+                        <label class="form-check-label" for="Playing">
+                            Playing
+                        </label>
+                    </div>
+                </div>
+                <small id="HabbitsMsg" style="color: #DC3545;"></small>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" class="btn btn-success" id="myBtn">
+            </div>
+        </form>
+    </div>
+    <!-- Forms Validation -->
+    <script src="./index.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"

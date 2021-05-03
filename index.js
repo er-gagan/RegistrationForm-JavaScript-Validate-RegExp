@@ -168,37 +168,32 @@ let Others = document.getElementById("others");
 let GenderMsg = document.getElementById("GenderMsg");
 let GenderValue = null;
 
-Males.addEventListener("click", () => {
-  GenderValue = "Male";
-  Males.classList.remove("is-invalid");
-  Males.classList.add("is-valid");
-  Females.classList.remove("is-invalid");
-  Females.classList.remove("is-valid");
-  Others.classList.remove("is-invalid");
-  Others.classList.remove("is-valid");
+genderArray = [Males, Females, Others]
+const genderValidate = (genderVal, val) => {
+  for (let i = 0; i < 3; i++) {
+    if (genderArray[i] != genderVal) {
+      genderArray[i].classList.remove("is-invalid")
+      genderArray[i].classList.remove("is-valid")
+    }
+    else {
+      genderArray[i].classList.remove("is-invalid")
+      genderArray[i].classList.add("is-valid")
+    }
+  }
+  GenderValue = val;
   GenderMsg.innerText = "";
+}
+
+Males.addEventListener("click", () => {
+  genderValidate(Males, "Male")
 });
 
 Females.addEventListener("click", () => {
-  GenderValue = "Female";
-  Males.classList.remove("is-invalid");
-  Males.classList.remove("is-valid");
-  Females.classList.remove("is-invalid");
-  Females.classList.add("is-valid");
-  Others.classList.remove("is-invalid");
-  Others.classList.remove("is-valid");
-  GenderMsg.innerText = "";
+  genderValidate(Females, "Female")
 });
 
 Others.addEventListener("click", () => {
-  GenderValue = "Others";
-  Males.classList.remove("is-invalid");
-  Males.classList.remove("is-valid");
-  Females.classList.remove("is-invalid");
-  Females.classList.remove("is-valid");
-  Others.classList.remove("is-invalid");
-  Others.classList.add("is-valid");
-  GenderMsg.innerText = "";
+  genderValidate(Others, "Others")
 });
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Gender Validation END ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -211,103 +206,81 @@ let playings = document.getElementById("Playing")
 let HabbitsMsg = document.getElementById("HabbitsMsg")
 
 let habbitsArray = []
-const habbitfun = () => {
+
+habbitsList = [codings, singings, dancings, readings, playings]
+const checkHabbitsValidation = (habbit, val) => {
+  for (let i = 0; i < 5; i++) {
+    if (habbitsList[i] !== habbit) {
+      if (habbitsList[i].checked) {
+        habbitsList[i].classList.add("is-valid")
+      }
+      else {
+        habbitsList[i].classList.remove("is-valid")
+        habbitsList[i].classList.remove("is-invalid")
+      }
+    }
+    else {
+      habbitsList[i].classList.remove("is-invalid")
+      habbitsList[i].classList.add("is-valid")
+    }
+  }
+  habbitsArray.push(val)
+  HabbitsMsg.innerText = ""
   habbitsArray = [...new Set(habbitsArray)]
+}
+
+const checkHabbitsValidationElse = (habbit, val) => {
+  let index = habbitsArray.indexOf(val)
+  if (index !== -1) {
+    habbitsArray.splice(index, 1)
+  }
+  habbit.classList.remove("is-invalid")
+  habbit.classList.remove("is-valid")
 }
 
 codings.addEventListener("click", () => {
   if (codings.checked == true) {
-    habbitsArray.push("Coding")
-    codings.classList.remove("is-invalid")
-    codings.classList.add("is-valid")
-    HabbitsMsg.innerText = ""
-    habbitfun()
+    checkHabbitsValidation(codings, "Coding")
   }
   else {
-    let index = habbitsArray.indexOf("Coding")
-    if (index !== -1) {
-      habbitsArray.splice(index, 1)
-    }
-    codings.classList.remove("is-invalid")
-    codings.classList.remove("is-valid")
+    checkHabbitsValidationElse(codings, "Coding")
   }
-  console.log(habbitsArray)
 })
 
 singings.addEventListener("click", () => {
   if (singings.checked == true) {
-    habbitsArray.push("Singing")
-    singings.classList.remove("is-invalid")
-    singings.classList.add("is-valid")
-    HabbitsMsg.innerText = ""
-    habbitfun()
+    checkHabbitsValidation(singings, "Singing")
   }
   else {
-    let index = habbitsArray.indexOf("Singing")
-    if (index !== -1) {
-      habbitsArray.splice(index, 1)
-    }
-    singings.classList.remove("is-invalid")
-    singings.classList.remove("is-valid")
+    checkHabbitsValidationElse(singings, "Singing")
   }
-  console.log(habbitsArray)
 })
 
 dancings.addEventListener("click", () => {
   if (dancings.checked == true) {
-    habbitsArray.push("Dancing")
-    dancings.classList.remove("is-invalid")
-    dancings.classList.add("is-valid")
-    HabbitsMsg.innerText = ""
-    habbitfun()
+    checkHabbitsValidation(dancings, "Dancing")
   }
   else {
-    let index = habbitsArray.indexOf("Dancing")
-    if (index !== -1) {
-      habbitsArray.splice(index, 1)
-    }
-    dancings.classList.remove("is-invalid")
-    dancings.classList.remove("is-valid")
+    checkHabbitsValidationElse(dancings, "Dancing")
   }
-  console.log(habbitsArray)
 })
 
 readings.addEventListener("click", () => {
   if (readings.checked == true) {
-    habbitsArray.push("Reading")
-    readings.classList.remove("is-invalid")
-    readings.classList.add("is-valid")
-    HabbitsMsg.innerText = ""
-    habbitfun()
+    checkHabbitsValidation(readings, "Reading")
   }
   else {
-    let index = habbitsArray.indexOf("Reading")
-    if (index !== -1) {
-      habbitsArray.splice(index, 1)
-    }
-    readings.classList.remove("is-invalid")
-    readings.classList.remove("is-valid")
+    checkHabbitsValidationElse(readings, "Reading")
   }
-  console.log(habbitsArray)
 })
 
 playings.addEventListener("click", () => {
   if (playings.checked == true) {
-    habbitsArray.push("Playing")
-    playings.classList.remove("is-invalid")
-    playings.classList.add("is-valid")
-    HabbitsMsg.innerText = ""
-    habbitfun()
+    checkHabbitsValidation(playings, "Playing")
   }
   else {
-    let index = habbitsArray.indexOf("Playing")
-    if (index !== -1) {
-      habbitsArray.splice(index, 1)
-    }
-    playings.classList.remove("is-invalid")
-    playings.classList.remove("is-valid")
+    checkHabbitsValidationElse(playings, "Playing")
   }
-  console.log(habbitsArray)
 })
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Habbits Validation END ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -325,31 +298,54 @@ for (let i = 0; i < list.length; i++) {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Disable|Active submit button's logic END ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Form Submission logic start vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+const GenderValudationFun = () => {
+  Males.classList.add("is-invalid");
+  Males.classList.remove("is-valid");
+  Females.classList.add("is-invalid");
+  Females.classList.remove("is-valid");
+  Others.classList.add("is-invalid");
+  Others.classList.remove("is-valid");
+  GenderMsg.innerText = "Please select your gender";
+}
+
+const HabbitsValidationFun = () => {
+  HabbitsMsg.innerText = "Please select atleast one habbits"
+  codings.classList.add("is-invalid")
+  codings.classList.remove("is-valid")
+  singings.classList.add("is-invalid")
+  singings.classList.remove("is-valid")
+  dancings.classList.add("is-invalid")
+  dancings.classList.remove("is-valid")
+  readings.classList.add("is-invalid")
+  readings.classList.remove("is-valid")
+  playings.classList.add("is-invalid")
+  playings.classList.remove("is-valid")
+}
+
+let headerMsg = document.getElementById("headerMsg")
+let bodyMsg = document.getElementById("bodyMsg")
+let showMsg = document.getElementById("showMsg")
+
 document.getElementById("myForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  if (GenderValue == null) {
-    Males.classList.add("is-invalid");
-    Males.classList.remove("is-valid");
-    Females.classList.add("is-invalid");
-    Females.classList.remove("is-valid");
-    Others.classList.add("is-invalid");
-    Others.classList.remove("is-valid");
-    GenderMsg.innerText = "Please select your gender";
+  if (GenderValue == null && habbitsArray.length == 0) {
+    GenderValudationFun()
+    HabbitsValidationFun()
+  }
+  else if (GenderValue == null) {
+    GenderValudationFun()
   }
   else if (habbitsArray.length == 0) {
-    HabbitsMsg.innerText = "Please select atleast one habbits"
-    codings.classList.add("is-invalid")
-    codings.classList.remove("is-valid")
-    singings.classList.add("is-invalid")
-    singings.classList.remove("is-valid")
-    dancings.classList.add("is-invalid")
-    dancings.classList.remove("is-valid")
-    readings.classList.add("is-invalid")
-    readings.classList.remove("is-valid")
-    playings.classList.add("is-invalid")
-    playings.classList.remove("is-valid")
+    HabbitsValidationFun()
   }
   else {
+    headerMsg.innerText = "Success!"
+    bodyMsg.innerText = " Your form is successfully submitted"
+    $('#showMsg').slideDown();
+    const AsyncFunTimeOut = () => {
+      $('#showMsg').slideUp();
+    }
+    setTimeout(AsyncFunTimeOut, 5000)
     console.log(
       Names.value,
       Emails.value,
