@@ -341,9 +341,16 @@ document.getElementById("myForm").addEventListener("submit", (e) => {
   else {
     headerMsg.innerText = "Success!"
     bodyMsg.innerText = " Your form is successfully submitted"
-    $('#showMsg').slideDown();
-    const AsyncFunTimeOut = () => {
-      $('#showMsg').slideUp();
+    jQuery.noConflict();
+    jQuery(document).ready(($) => {
+      $('#showMsg').slideDown();
+    })
+
+    AsyncFunTimeOut = () => {
+      jQuery.noConflict();
+      jQuery(document).ready(($) => {
+        $('#showMsg').slideUp();
+      })
     }
     setTimeout(AsyncFunTimeOut, 5000)
     console.log(
